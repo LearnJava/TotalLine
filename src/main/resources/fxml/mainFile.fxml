@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first.controller.Controller">
+   <children>
+      <Group>
+         <children>
+            <BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+               <center>
+                  <TableView fx:id="mainTable" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="dateCol" prefWidth="120" text="C1" />
+                      <TableColumn fx:id="value1Col" prefWidth="90" text="C2" />
+                      <TableColumn fx:id="value2Col" prefWidth="90" text="C3" />
+                      <TableColumn fx:id="value3Col" prefWidth="90" text="C4" />
+                    </columns>
+                  </TableView>
+               </center>
+               <bottom>
+                  <TableView fx:id="sumTable" prefHeight="90.0" stylesheets="@../style/application.css" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="textCol" text="C10" />
+                      <TableColumn fx:id="value10Col" text="C20" />
+                      <TableColumn fx:id="value20Col" text="C30" />
+                      <TableColumn fx:id="value30Col" text="C40" />
+                    </columns>
+                     <styleClass>
+                        <String fx:value="tableview-header-hidden" />
+                        <String fx:value="sumtable" />
+                     </styleClass>
+                  </TableView>
+               </bottom>
+            </BorderPane>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
