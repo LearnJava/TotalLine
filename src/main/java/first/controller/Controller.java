@@ -34,6 +34,22 @@ public class Controller {
     @FXML
     AnchorPane anchorPane = new AnchorPane();
 
+    public TableView<Data> getMainTable() {
+        return mainTable;
+    }
+
+    public void setMainTable(TableView<Data> mainTable) {
+        this.mainTable = mainTable;
+    }
+
+    public TableView<SumData> getSumTable() {
+        return sumTable;
+    }
+
+    public void setSumTable(TableView<SumData> sumTable) {
+        this.sumTable = sumTable;
+    }
+
     @FXML
     TableView<Data> mainTable;
     @FXML
@@ -103,56 +119,32 @@ public class Controller {
         bp.prefHeightProperty().bind(anchorPane.heightProperty());
 
         // synchronize scrollbars (must happen after table was made visible)
-//        ScrollBar mainTableHorizontalScrollBar = findScrollBar( mainTable, Orientation.HORIZONTAL);
-//        ScrollBar sumTableHorizontalScrollBar = findScrollBar( sumTable, Orientation.HORIZONTAL);
-//        mainTableHorizontalScrollBar.valueProperty().bindBidirectional( sumTableHorizontalScrollBar.valueProperty());
 
-        scroll = new ScrollBar();
-        scroll.setMax(100); //make sure the max is equal to the size of the table row data.
-        scroll.setMin(0);
-        scroll.valueProperty().addListener(new ChangeListener(){
 
-            @Override
-            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                mainTable.scrollTo((Integer) newValue);
-                sumTable.scrollTo((Integer) newValue);
-            }
-
+//        scroll = new ScrollBar();
+//        scroll.setMax(100); //make sure the max is equal to the size of the table row data.
+//        scroll.setMin(0);
+//        scroll.valueProperty().addListener(new ChangeListener(){
+//
 //            @Override
-//            public void changed(ObservableValue ov, Number t, Number t1) {
-//                //Scroll your tableview according to the table row index
-//                table1.scrollTo(t1.intValue());
-//                table2.scrollTo(t1.intValue());
+//            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+//                mainTable.scrollTo((Integer) newValue);
+//                sumTable.scrollTo((Integer) newValue);
 //            }
-
-        });
+//
+////            @Override
+////            public void changed(ObservableValue ov, Number t, Number t1) {
+////                //Scroll your tableview according to the table row index
+////                table1.scrollTo(t1.intValue());
+////                table2.scrollTo(t1.intValue());
+////            }
+//
+//        });
 
         System.out.println();
     }
 
-    /**
-     * Find the horizontal scrollbar of the given table.
-     *
-     * @param table
-     * @return
-     */
-    private ScrollBar findScrollBar(TableView<?> table, Orientation orientation) {
 
-        // this would be the preferred solution, but it doesn't work. it always gives back the vertical scrollbar
-        //		return (ScrollBar) table.lookup(".scroll-bar:horizontal");
-        //
-        // => we have to search all scrollbars and return the one with the proper orientation
-
-        Set<Node> set = table.lookupAll(".scroll-bar");
-        for (Node node : set) {
-            ScrollBar bar = (ScrollBar) node;
-            if (bar.getOrientation() == orientation) {
-                return bar;
-            }
-        }
-
-        return null;
-    }
 
     /**
      * Summary table column mapping.
