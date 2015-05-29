@@ -2,6 +2,10 @@ package first.controller;
 
 import first.Data;
 import first.SumData;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.TextAlignment;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -34,9 +39,7 @@ public class Controller {
     @FXML
     TableView<SumData> sumTable;
     @FXML
-    ScrollBar mainTableHorizontalScrollBar;
-    @FXML
-    ScrollBar sumTableHorizontalScrollBar;
+    ScrollBar scroll;
 
     @FXML
     TableColumn<Date, LocalDate> dateCol;
@@ -100,10 +103,31 @@ public class Controller {
         bp.prefHeightProperty().bind(anchorPane.heightProperty());
 
         // synchronize scrollbars (must happen after table was made visible)
-        ScrollBar mainTableHorizontalScrollBar = findScrollBar( mainTable, Orientation.HORIZONTAL);
-        ScrollBar sumTableHorizontalScrollBar = findScrollBar( sumTable, Orientation.HORIZONTAL);
-        mainTableHorizontalScrollBar.valueProperty().bindBidirectional( sumTableHorizontalScrollBar.valueProperty());
+//        ScrollBar mainTableHorizontalScrollBar = findScrollBar( mainTable, Orientation.HORIZONTAL);
+//        ScrollBar sumTableHorizontalScrollBar = findScrollBar( sumTable, Orientation.HORIZONTAL);
+//        mainTableHorizontalScrollBar.valueProperty().bindBidirectional( sumTableHorizontalScrollBar.valueProperty());
 
+        scroll = new ScrollBar();
+        scroll.setMax(100); //make sure the max is equal to the size of the table row data.
+        scroll.setMin(0);
+        scroll.valueProperty().addListener(new ChangeListener(){
+
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                mainTable.scrollTo((Integer) newValue);
+                sumTable.scrollTo((Integer) newValue);
+            }
+
+//            @Override
+//            public void changed(ObservableValue ov, Number t, Number t1) {
+//                //Scroll your tableview according to the table row index
+//                table1.scrollTo(t1.intValue());
+//                table2.scrollTo(t1.intValue());
+//            }
+
+        });
+
+        System.out.println();
     }
 
     /**
